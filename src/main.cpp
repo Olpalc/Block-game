@@ -5,20 +5,20 @@ int main(int argc, char **argv)
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
-        std::cout<<"Failed loading SDL2", SDL_GetError();
+        std::cout << "Failed loading SDL2", SDL_GetError();
         return 1;
     }
-    
+
     SDL_Window *window;
 
-    window = SDL_CreateWindow("SLD test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, 0);
+    window = SDL_CreateWindow("SLD test", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED , 800, 600, 0);
 
     if (!window)
     {
-        std::cout<<"Failed to initialize window!\n" ;
+        std::cout << "Failed to initialize window!\n";
         return 1;
     }
-    
+
     bool running = true;
     while (running)
     {
@@ -30,14 +30,12 @@ int main(int argc, char **argv)
             case SDL_QUIT:
                 running = false;
                 break;
-            
             default:
                 break;
             }
         }
-        
     }
-    
-    std::cout<<"The app is running!\n";
+
+    std::cout << "The app is running!\n";
     return 0;
 }
