@@ -1,46 +1,43 @@
-#include "SDL2/SDL.h"
 #include <iostream>
+#include "SDL2/SDL.h"
 
-#define SCREEN_WIDTH 1280 
-#define SCREEN_HEIGHT 720
-
-int main(int argc, char** argv){
-    if(SDL_Init(SDL_INIT_VIDEO) < 0){ 
-        std::cout<<("Error: SDL failed to initialize\nSDL Error: '%s'\n", SDL_GetError());
+int main(int argc, char **argv)
+{
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
+        std::cout<<"Failed loading SDL2", SDL_GetError();
         return 1;
     }
+    
+    SDL_Window *window;
 
-    SDL_Window *window = SDL_CreateWindow("SLD test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-    if(!window){
-        std::cout<<("Error: Failed to open window\nSDL Error: '%s'\n", SDL_GetError());
+    window = SDL_CreateWindow("SLD test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, 0);
+
+    if (!window)
+    {
+        std::cout<<"Failed to initialize window!\n" ;
         return 1;
     }
-
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    if(!renderer){
-        std::cout<<("Error: Failed to create renderer\nSDL Error: '%s'\n", SDL_GetError());
-        return 1;
-    }
-
+    
     bool running = true;
-    while(running){
+    while (running)
+    {
         SDL_Event event;
-        while(SDL_PollEvent(&event)){
-            switch(event.type){
-                case SDL_QUIT:g
-                    running = false;
-                    break;
-
-                default:
-                    break;
+        while (SDL_PollEvent(&event))
+        {
+            switch (event.type)
+            {
+            case SDL_QUIT:
+                running = false;
+                break;
+            
+            default:
+                break;
             }
         }
-
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
-
-        SDL_RenderPresent(renderer);
+        
     }
-
+    
+    std::cout<<"The app is running!\n";
     return 0;
 }
