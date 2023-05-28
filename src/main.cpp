@@ -1,41 +1,51 @@
-#include <iostream>
-#include "SDL2/SDL.h"
+#include <SDL2/SDL.h>
 
-int main(int argc, char **argv)
-{
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
-    {
-        std::cout << "Failed loading SDL2", SDL_GetError();
-        return 1;
-    }
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+const int BLOCK_SIZE = 20;
 
-    SDL_Window *window;
+int main(int argc , char **argv) {
+    // Initialize SDL
+    SDL_Init(SDL_INIT_VIDEO);
 
-    window = SDL_CreateWindow("SLD test", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED , 800, 600, 0);
+    // Create a window
+    SDL_Window* window = SDL_CreateWindow("Block Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
-    if (!window)
-    {
-        std::cout << "Failed to initialize window!\n";
-        return 1;
-    }
+    // Create a renderer
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    bool running = true;
-    while (running)
-    {
-        SDL_Event event;
-        while (SDL_PollEvent(&event))
-        {
-            switch (event.type)
-            {
-            case SDL_QUIT:
-                running = false;
-                break;
-            default:
-                break;
+    // Set the initial position of the block
+    int blockX = SCREEN_WIDTH / 2 - BLOCK_SIZE / 2;
+    int blockY = SCREEN_HEIGHT / 2 - BLOCK_SIZE / 2;
+
+    // Event loop
+    bool quit = false;
+    SDL_Event event;
+    while (!quit) {
+        // Handle events
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                quit = true;
             }
         }
+
+        // Clear the screen
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+
+        // Draw the block
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_Rect blockRect = { blockX, blockY, BLOCK_SIZE, BLOCK_SIZE };
+        SDL_RenderFillRect(renderer, &blockRect);
+
+        // Update the screen
+        SDL_RenderPresent(renderer);
     }
 
-    std::cout << "The app is running!\n";
+    // Clean up
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
     return 0;
 }
