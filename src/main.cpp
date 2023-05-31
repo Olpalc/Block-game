@@ -1,9 +1,14 @@
 #include <SDL2/SDL.h>
+#include <iostream>
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 const int BLOCK_SIZE = 20;
 const int GRAVITY = 1;
+const int FRAME_RATE = 60;
+const int MAX_HEIGHT = SCREEN_HEIGHT - BLOCK_SIZE;
+const int BLOCK_SPEED = 1;
+
 
 struct Block
 {
@@ -11,6 +16,19 @@ struct Block
     int y;
     int velocityY;
 };
+
+void UpdateBlockPosition(Block& block , int dx ,int dy)
+{
+    block.x = dx;
+    block.y = dy;
+
+    if (block.y < 0) {
+        block.y = 0;
+    }
+    else if (block.y > SCREEN_HEIGHT - BLOCK_SIZE) {
+        block.y = SCREEN_HEIGHT - BLOCK_SIZE;
+    }
+}
 
 void updateBlock(Block &block)
 {
@@ -24,7 +42,7 @@ void updateBlock(Block &block)
     }
 }
 
-int main()
+int main(int argc, char **argv)
 {
     // Initialize SDL
     SDL_Init(SDL_INIT_VIDEO);
@@ -41,11 +59,17 @@ int main()
     block.y = SCREEN_HEIGHT / 2 - BLOCK_SIZE / 2;
     block.velocityY = 0;
 
+    const int FRAME_DELAY = 1000 / FRAME_RATE;
+
+    Uint32 frameStart, frameTime;
+
     // Event loop
     bool quit = false;
     SDL_Event event;
     while (!quit)
     {
+        frameStart = SDL_GetTicks(); // Get the current time at the start of the frame
+
         // Handle events
         while (SDL_PollEvent(&event))
         {
@@ -67,7 +91,7 @@ int main()
 
         // Clear the screen
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
+        SDL_RenderClear(renderer);        
 
         // Draw the block
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -76,6 +100,13 @@ int main()
 
         // Update the screen
         SDL_RenderPresent(renderer);
+        
+        frameTime = SDL_GetTicks() - frameStart;
+
+        if (frameTime < FRAME_DELAY)
+        {
+            SDL_Delay(FRAME_DELAY - frameTime);
+        }
     }
 
     // Clean up
