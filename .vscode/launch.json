@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Olpaic_/WORKSPACES/SDL2 basics",
-      "program": "c:/Users/Olpaic_/WORKSPACES/SDL2 basics/build/Debug/outDebug",
+      "cwd": "c:/Users/Olpaic_/WORKSPACES/idk",
+      "program": "c:/Users/Olpaic_/WORKSPACES/idk/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

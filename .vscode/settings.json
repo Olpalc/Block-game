@@ -1,4 +1,5 @@
 {
+  "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",
@@ -36,6 +37,5 @@
     "**/.vscode/**"
   ],
   "C_Cpp_Runner.useAddressSanitizer": false,
-  "C_Cpp_Runner.showCompilationTime": false,
-  "C_Cpp.errorSquiggles": "disabled"
+  "C_Cpp_Runner.showCompilationTime": false
 }
