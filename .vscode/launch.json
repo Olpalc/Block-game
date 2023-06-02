@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Olpaic_/WORKSPACES/idk",
-      "program": "c:/Users/Olpaic_/WORKSPACES/idk/build/Debug/outDebug",
+      "cwd": "c:/Users/Olpaic_/WORKSPACES/Block-game",
+      "program": "c:/Users/Olpaic_/WORKSPACES/Block-game/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
