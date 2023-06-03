@@ -1,16 +1,18 @@
 #pragma once
 
+#include <iostream>
 #include "SDL2/SDL.h"
 #include "Engine.hpp"
 
 const int BLOCK_SIZE = 30;
+const int BLOCK_SPEED = 5;
 
 struct Block
 {
-    int x;
-    int y;
+    int x ;
+    int y ;
     int velocityX;
-    int velocityY;
+    int velocityY ;
     void UpdateBlockPos(Block &Block);
     void GetBlockPos(Block &Block);
     void BlockLimit(Block &Block);
@@ -20,6 +22,9 @@ void Block::UpdateBlockPos(Block &Block)
 {
     Block.y += Block.velocityY;
     Block.velocityY += GRAVITY; //ads to the velocity the value of GRAVITY
+
+    Block.x += Block.velocityX;
+
 }
 
 void Block::GetBlockPos(Block &Block) // the initial position of the block
@@ -47,6 +52,5 @@ void Block::BlockLimit(Block &Block) //limits the block so it doesnt jump over t
     {
         Block.x = SCREEN_WIDTH - BLOCK_SIZE;
     }
-    
     
 }

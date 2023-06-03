@@ -5,6 +5,7 @@
 const int FRAME_RATE = 60;
 const int FRAME_DELAY = 1000 / FRAME_RATE; 
 
+
 int main(int argc, char **argv)
 {
     Renderer renderer;
@@ -33,7 +34,22 @@ int main(int argc, char **argv)
                 _quit = true;
                 break;
             case SDL_KEYDOWN:
-                block.velocityY = -20;
+                switch (Event.key.keysym.sym)
+                {
+                case SDLK_RIGHT:
+                    block.velocityX = 20;
+                    break;
+                case SDLK_LEFT:
+                    block.velocityX =-20;
+                break;
+                case SDLK_UP:
+                    block.velocityY = -20;
+                    break;
+                case SDLK_DOWN:
+                    block.velocityY = 20;
+                default:
+                    break;
+                }
                 break;
             default:
                 break;
