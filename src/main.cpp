@@ -7,12 +7,12 @@ const int FRAME_DELAY = 1000 / FRAME_RATE;
 
 int main(int argc, char **argv)
 {
+    Renderer renderer;
+    Block block;
+
     SDL_Init(SDL_INIT_EVERYTHING); // Initialize SDL2;
 
-    block.y = (SCREEN_HEIGHT - BLOCK_SIZE) / 2;
-    block.x = (SCREEN_WIDTH - BLOCK_SIZE) / 2;
-
-    Renderer renderer;
+    block.GetBlockPos(block);
 
     renderer.CreateRendererAndWindow("Block-Game", SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -40,13 +40,15 @@ int main(int argc, char **argv)
             }
         }
 
+        block.BlockLimit(block);
+
         renderer.clear();
 
-        SDL_SetRenderDrawColor(renderer.Renderer, 255, 255, 255, 255);
+        SDL_SetRenderDrawColor(renderer.Renderer, 0, 255, 255, 255);
         SDL_Rect BlockRect = {block.x, block.y, BLOCK_SIZE, BLOCK_SIZE};
         SDL_RenderFillRect(renderer.Renderer, &BlockRect);
 
-        UpdateBlockPos();
+        block.UpdateBlockPos(block);
 
         renderer.present();
 

@@ -11,18 +11,48 @@ struct Block
     int y;
     int velocityX;
     int velocityY;
+    void UpdateBlockPos(Block &Block);
+    void GetBlockPos(Block &Block);
+    void BlockLimit(Block &Block);
 };
 
-Block block;
-
-void UpdateBlockPos()
+void Block::UpdateBlockPos(Block &Block)
 {
-    block.y += block.velocityY;
-    block.velocityY += GRAVITY;
+    Block.y += Block.velocityY;
+    Block.velocityY += GRAVITY;
 
-    if (block.y + BLOCK_SIZE >= SCREEN_HEIGHT)
+    if (Block.y + BLOCK_SIZE >= SCREEN_HEIGHT)
     {
-        block.y = SCREEN_HEIGHT - BLOCK_SIZE;
-        block.velocityY = 0;
+        Block.y = SCREEN_HEIGHT - BLOCK_SIZE;
+        Block.velocityY = 0;
     }
+}
+
+void Block::GetBlockPos(Block &Block)
+{
+    Block.y = (SCREEN_HEIGHT - BLOCK_SIZE) / 2;
+    Block.x = (SCREEN_WIDTH - BLOCK_SIZE) / 2;
+}
+
+void Block::BlockLimit(Block &Block)
+{
+    if (Block.y <= 0)
+    {
+        Block.y = 0;
+    }
+    else if (Block.y + BLOCK_SIZE >= SCREEN_HEIGHT)
+    {
+        Block.y = SCREEN_HEIGHT - BLOCK_SIZE;
+    }
+
+    if (Block.x <=0)
+    {
+        Block.x = 0;
+    }
+    else if (Block.x + BLOCK_SIZE >= SCREEN_WIDTH)
+    {
+        Block.x = SCREEN_WIDTH - BLOCK_SIZE;
+    }
+    
+    
 }
