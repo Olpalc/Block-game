@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SDL2/SDL.h"
-#include "Engine.h"
+#include "Engine.hpp"
 
 const int BLOCK_SIZE = 30;
 

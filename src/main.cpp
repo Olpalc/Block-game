@@ -1,6 +1,6 @@
 #include "SDL2/SDL.h"
-#include "Engine.h"
-#include "Block.h"
+#include "Engine.hpp"
+#include "Block.hpp"
 
 const int FRAME_RATE = 60;
 const int FRAME_DELAY = 1000 / FRAME_RATE;
