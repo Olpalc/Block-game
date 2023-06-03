@@ -2,6 +2,9 @@
 #include "Engine.h"
 #include "Block.h"
 
+const int FRAME_RATE = 60;
+const int FRAME_DELAY = 1000 / FRAME_RATE;
+
 int main(int argc, char **argv)
 {
     SDL_Init(SDL_INIT_EVERYTHING); // Initialize SDL2;
@@ -13,10 +16,15 @@ int main(int argc, char **argv)
 
     renderer.CreateRendererAndWindow("Block-Game", SCREEN_WIDTH, SCREEN_HEIGHT);
 
+    Uint32 Start;
+    int frameTime;
+
     bool _quit = false;
     SDL_Event Event;
     while (!_quit) // main loop
     {
+        Start = SDL_GetTicks();
+
         while (SDL_PollEvent(&Event))
         {
             switch (Event.type)
@@ -41,6 +49,12 @@ int main(int argc, char **argv)
         UpdateBlockPos();
 
         renderer.present();
+
+        frameTime = SDL_GetTicks() - Start;
+        if (frameTime < FRAME_DELAY)
+        {
+            SDL_Delay(FRAME_DELAY - frameTime);
+        }
     }
 
     renderer.DestroyWindowAndRenderer();
