@@ -14,7 +14,7 @@ public:
     SDL_Renderer *Renderer;
     CreateRendererAndWindow(const char *windowTitle, int windowWidth, int windowHeight);
     DestroyWindowAndRenderer();
-    void clear();
+    void clear(); //clears the renderer
     void present();
 };
 
@@ -29,7 +29,7 @@ Renderer::CreateRendererAndWindow(const char *windowTitle, int windowWidth, int 
     return 0;
 }
 
-Renderer::DestroyWindowAndRenderer()
+Renderer::DestroyWindowAndRenderer() 
 {
     SDL_DestroyRenderer(Renderer);
     SDL_DestroyWindow(Window);

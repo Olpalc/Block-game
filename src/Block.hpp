@@ -19,22 +19,16 @@ struct Block
 void Block::UpdateBlockPos(Block &Block)
 {
     Block.y += Block.velocityY;
-    Block.velocityY += GRAVITY;
-
-    if (Block.y + BLOCK_SIZE >= SCREEN_HEIGHT)
-    {
-        Block.y = SCREEN_HEIGHT - BLOCK_SIZE;
-        Block.velocityY = 0;
-    }
+    Block.velocityY += GRAVITY; //ads to the velocity the value of GRAVITY
 }
 
-void Block::GetBlockPos(Block &Block)
+void Block::GetBlockPos(Block &Block) // the initial position of the block
 {
     Block.y = (SCREEN_HEIGHT - BLOCK_SIZE) / 2;
     Block.x = (SCREEN_WIDTH - BLOCK_SIZE) / 2;
 }
 
-void Block::BlockLimit(Block &Block)
+void Block::BlockLimit(Block &Block) //limits the block so it doesnt jump over the window
 {
     if (Block.y <= 0)
     {

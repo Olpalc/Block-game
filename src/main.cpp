@@ -3,7 +3,7 @@
 #include "Block.hpp"
 
 const int FRAME_RATE = 60;
-const int FRAME_DELAY = 1000 / FRAME_RATE;
+const int FRAME_DELAY = 1000 / FRAME_RATE; 
 
 int main(int argc, char **argv)
 {
@@ -12,9 +12,9 @@ int main(int argc, char **argv)
 
     SDL_Init(SDL_INIT_EVERYTHING); // Initialize SDL2;
 
-    block.GetBlockPos(block);
+    block.GetBlockPos(block); 
 
-    renderer.CreateRendererAndWindow("Block-Game", SCREEN_WIDTH, SCREEN_HEIGHT);
+    renderer.CreateRendererAndWindow("Block-Game", SCREEN_WIDTH, SCREEN_HEIGHT);//create renderer and window
 
     Uint32 Start;
     int frameTime;
@@ -25,7 +25,7 @@ int main(int argc, char **argv)
     {
         Start = SDL_GetTicks();
 
-        while (SDL_PollEvent(&Event))
+        while (SDL_PollEvent(&Event)) // main loop
         {
             switch (Event.type)
             {
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
         renderer.clear();
 
         SDL_SetRenderDrawColor(renderer.Renderer, 0, 255, 255, 255);
-        SDL_Rect BlockRect = {block.x, block.y, BLOCK_SIZE, BLOCK_SIZE};
+        SDL_Rect BlockRect = {block.x, block.y, BLOCK_SIZE, BLOCK_SIZE};//render the block
         SDL_RenderFillRect(renderer.Renderer, &BlockRect);
 
         block.UpdateBlockPos(block);
@@ -59,7 +59,7 @@ int main(int argc, char **argv)
         }
     }
 
-    renderer.DestroyWindowAndRenderer();
+    renderer.DestroyWindowAndRenderer();//destroy and quit 
 
     return 0;
 }
