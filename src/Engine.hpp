@@ -12,10 +12,11 @@ class Renderer
 public:
     SDL_Window *Window;
     SDL_Renderer *Renderer;
+
     CreateRendererAndWindow(const char *windowTitle, int windowWidth, int windowHeight);
     DestroyWindowAndRenderer();
-    void clear(); //clears the renderer
-    void present();
+    void clear(); // Clears the renderer
+    void present(); // Presents the renderer
 };
 
 Renderer::CreateRendererAndWindow(const char *windowTitle, int windowWidth, int windowHeight)
@@ -31,6 +32,7 @@ Renderer::CreateRendererAndWindow(const char *windowTitle, int windowWidth, int 
 
 Renderer::DestroyWindowAndRenderer() 
 {
+    // Destroy the renderer and window
     SDL_DestroyRenderer(Renderer);
     SDL_DestroyWindow(Window);
 
@@ -39,11 +41,15 @@ Renderer::DestroyWindowAndRenderer()
 
 void Renderer::clear()
 {
+    // Set the renderer's draw color to black
     SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
+
+    // Clear the renderer
     SDL_RenderClear(Renderer);
 }
 
 void Renderer::present()
 {
+    // Present the renderer to display the rendered content
     SDL_RenderPresent(Renderer);
 }
