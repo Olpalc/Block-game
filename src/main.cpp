@@ -26,7 +26,7 @@ int main(int argc, char **argv)
         Start = SDL_GetTicks();
 
         while (SDL_PollEvent(&Event)) // Event loop
-        {
+        {   
             switch (Event.type)
             {
             case SDL_QUIT:
@@ -36,16 +36,16 @@ int main(int argc, char **argv)
                 switch (Event.key.keysym.sym)
                 {
                 case SDLK_RIGHT:
-                    block.velocityX = 20; // Set velocity to move right
+                    block.velocityX = BLOCK_SPEED; // Set velocity to move right
                     break;
                 case SDLK_LEFT:
-                    block.velocityX = -20; // Set velocity to move left
+                    block.velocityX = -BLOCK_SPEED; // Set velocity to move left
                     break;
                 case SDLK_UP:
-                    block.velocityY = -20; // Set velocity to move up
+                    block.velocityY = -BLOCK_SPEED; // Set velocity to move up
                     break;
                 case SDLK_DOWN:
-                    block.velocityY = 20; // Set velocity to move down
+                    block.velocityY = BLOCK_SPEED; // Set velocity to move down
                     break;
                 default:
                     break;
@@ -56,6 +56,8 @@ int main(int argc, char **argv)
             }
         }
 
+
+        block.BounceOff(block);
         block.BlockLimit(block); // Apply block movement limits
 
         renderer.clear(); // Clear the renderer

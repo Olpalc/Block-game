@@ -4,8 +4,8 @@
 #include "SDL2/SDL.h"
 #include "Engine.hpp"
 
-const int BLOCK_SIZE = 30;
-const int BLOCK_SPEED = 5;
+const int BLOCK_SIZE = 35;
+const int BLOCK_SPEED = 7.5;
 
 struct Block
 {
@@ -17,12 +17,12 @@ struct Block
     void UpdateBlockPos(Block &Block); // Updates the position of the block based on its velocity
     void GetBlockPos(Block &Block); // Sets the initial position of the block
     void BlockLimit(Block &Block); // Limits the block within the window boundaries
+    void BounceOff(Block &Block);
 };
 
 void Block::UpdateBlockPos(Block &Block)
 {
     Block.y += Block.velocityY; // Update the y-coordinate based on the y-velocity
-    Block.velocityY += GRAVITY; // Add the value of GRAVITY to the y-velocity to simulate gravity
 
     Block.x += Block.velocityX; // Update the x-coordinate based on the x-velocity
 }
@@ -57,4 +57,18 @@ void Block::BlockLimit(Block &Block)
     {
         Block.x = SCREEN_WIDTH - BLOCK_SIZE;
     }
+}
+
+void Block::BounceOff(Block & Block)
+{
+    if (Block.x <= 0 || Block.x >= SCREEN_WIDTH - BLOCK_SIZE)
+    {
+        Block.velocityX = - Block.velocityX;
+    }
+
+    if (Block.y <= 0 || Block.y >= SCREEN_HEIGHT - BLOCK_SIZE)
+    {
+        Block.velocityY = -Block.velocityY;
+    }
+    
 }
