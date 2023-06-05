@@ -2,12 +2,13 @@
 #include "Engine.hpp"
 #include "Block.hpp"
 
+
+
 const int FRAME_RATE = 60;
 const int FRAME_DELAY = 1000 / FRAME_RATE; 
 
 int main(int argc, char **argv)
 {
-    Renderer renderer;
     Block block;
 
     SDL_Init(SDL_INIT_EVERYTHING); // Initialize SDL2;
@@ -62,9 +63,7 @@ int main(int argc, char **argv)
 
         renderer.clear(); // Clear the renderer
 
-        SDL_SetRenderDrawColor(renderer.Renderer, 0, 255, 255, 255);
-        SDL_Rect BlockRect = {block.x, block.y, BLOCK_SIZE, BLOCK_SIZE};// Render the block
-        SDL_RenderFillRect(renderer.Renderer, &BlockRect);
+        block.SpawnBlock(block);
 
         block.UpdateBlockPos(block); // Update the position of the block based on its velocity
 

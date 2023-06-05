@@ -8,15 +8,16 @@ const int BLOCK_SPEED = 7.5;
 
 struct Block
 {
-    int x; 
-    int y; 
-    int velocityX; 
-    int velocityY; 
+    int x;
+    int y;
+    int velocityX;
+    int velocityY;
 
     void UpdateBlockPos(Block &Block); // Updates the position of the block based on its velocity
-    void GetBlockPos(Block &Block); // Sets the initial position of the block
-    void BlockLimit(Block &Block); // Limits the block within the window boundaries
+    void GetBlockPos(Block &Block);    // Sets the initial position of the block
+    void BlockLimit(Block &Block);     // Limits the block within the window boundaries
     void BounceOff(Block &Block);
+    void SpawnBlock(Block &Block);
 };
 
 void Block::UpdateBlockPos(Block &Block)
@@ -58,16 +59,22 @@ void Block::BlockLimit(Block &Block)
     }
 }
 
-void Block::BounceOff(Block & Block)
+void Block::BounceOff(Block &Block)
 {
     if (Block.x <= 0 || Block.x >= SCREEN_WIDTH - BLOCK_SIZE)
     {
-        Block.velocityX = - Block.velocityX;
+        Block.velocityX = -Block.velocityX;
     }
 
     if (Block.y <= 0 || Block.y >= SCREEN_HEIGHT - BLOCK_SIZE)
     {
         Block.velocityY = -Block.velocityY;
     }
-    
+}
+
+void Block::SpawnBlock(Block &Block)
+{
+    SDL_SetRenderDrawColor(renderer.Renderer, 0, 255, 255, 255);
+    SDL_Rect BlockRect = {Block.x, Block.y, BLOCK_SIZE, BLOCK_SIZE}; // Render the block
+    SDL_RenderFillRect(renderer.Renderer, &BlockRect);
 }

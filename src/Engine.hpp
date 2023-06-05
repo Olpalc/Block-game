@@ -53,3 +53,5 @@ void Renderer::present()
     // Present the renderer to display the rendered content
     SDL_RenderPresent(Renderer);
 }
+
+Renderer renderer;
