@@ -16,8 +16,8 @@ struct Block
     void UpdateBlockPos(Block &Block); // Updates the position of the block based on its velocity
     void GetBlockPos(Block &Block);    // Sets the initial position of the block
     void BlockLimit(Block &Block);     // Limits the block within the window boundaries
-    void BounceOff(Block &Block);
-    void SpawnBlock(Block &Block);
+    void BounceOff(Block &Block);   //Bounces the Block off the screen border
+    void SpawnBlock(Block &Block);  //Spawns the Block
 };
 
 void Block::UpdateBlockPos(Block &Block)
