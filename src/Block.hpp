@@ -22,9 +22,9 @@ struct Block
 
 void Block::UpdateBlockPos(Block &Block)
 {
-    Block.y += Block.velocityY; // Update the y-coordinate based on the y-velocity
+    Block.y += Block.velocityY * DT; // Update the y-coordinate based on the y-velocity
 
-    Block.x += Block.velocityX; // Update the x-coordinate based on the x-velocity
+    Block.x += Block.velocityX* DT; // Update the x-coordinate based on the x-velocity
 }
 
 void Block::GetBlockPos(Block &Block)

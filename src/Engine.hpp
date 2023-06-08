@@ -7,6 +7,13 @@ const int SCREEN_WIDTH = 640;
 
 const int GRAVITY = 1;
 
+double DT = 1;
+
+void CalculateDeltaTime(double Start , double End, double DT)
+{
+    DT = Start - End / 1000.0;
+}
+
 class Renderer
 {
 public:

@@ -3,9 +3,10 @@
 #include "Block.hpp"
 
 
-
 const int FRAME_RATE = 60;
-const int FRAME_DELAY = 1000 / FRAME_RATE; 
+const int FRAME_DELAY = 1000 / FRAME_RATE;
+
+double DeltaTime;
 
 int main(int argc, char **argv)
 {
@@ -17,7 +18,7 @@ int main(int argc, char **argv)
 
     renderer.CreateRendererAndWindow("Block-Game", SCREEN_WIDTH, SCREEN_HEIGHT);// Create renderer and window
 
-    Uint32 Start;
+    double Start , End;
     int frameTime;
 
     bool _quit = false;
@@ -74,7 +75,11 @@ int main(int argc, char **argv)
         {
             SDL_Delay(FRAME_DELAY - frameTime); // Delay to achieve the desired frame rate
         }
+
+        End = SDL_GetTicks();
+        CalculateDeltaTime(Start , End ,DeltaTime );
     }
+
 
     renderer.DestroyWindowAndRenderer(); // Destroy the window and renderer
 
