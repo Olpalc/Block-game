@@ -1,7 +1,7 @@
 #include "SDL2/SDL.h"
 #include "Engine.hpp"
 #include "Block.hpp"
-#include <iostream>
+
 
 const int FRAME_RATE = 240;
 const int FRAME_DELAY = 1000 / FRAME_RATE;
@@ -76,8 +76,6 @@ int main(int argc, char **argv)
         {
             SDL_Delay(FRAME_DELAY - frameTime); // Delay to achieve the desired frame rate
         }
-
-        std::cout << DeltaTime << "\n";
     }
 
     renderer.DestroyWindowAndRenderer(); // Destroy the window and renderer
