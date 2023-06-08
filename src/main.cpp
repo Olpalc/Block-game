@@ -1,9 +1,9 @@
 #include "SDL2/SDL.h"
 #include "Engine.hpp"
 #include "Block.hpp"
+#include <iostream>
 
-
-const int FRAME_RATE = 60;
+const int FRAME_RATE = 240;
 const int FRAME_DELAY = 1000 / FRAME_RATE;
 
 int main(int argc, char **argv)
@@ -12,11 +12,11 @@ int main(int argc, char **argv)
 
     SDL_Init(SDL_INIT_EVERYTHING); // Initialize SDL2;
 
-    block.GetBlockPos(block); 
+    block.GetBlockPos(block);
 
-    renderer.CreateRendererAndWindow("Block-Game", SCREEN_WIDTH, SCREEN_HEIGHT);// Create renderer and window
+    renderer.CreateRendererAndWindow("Block-Game", SCREEN_WIDTH, SCREEN_HEIGHT); // Create renderer and window
 
-    double Start , End;
+    double Start, End;
     int frameTime;
 
     bool _quit = false;
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
         Start = SDL_GetTicks();
 
         while (SDL_PollEvent(&Event)) // Event loop
-        {   
+        {
             switch (Event.type)
             {
             case SDL_QUIT:
@@ -56,7 +56,6 @@ int main(int argc, char **argv)
             }
         }
 
-
         block.BounceOff(block);
         block.BlockLimit(block); // Apply block movement limits
 
@@ -64,9 +63,13 @@ int main(int argc, char **argv)
 
         block.SpawnBlock(block);
 
-        block.UpdateBlockPos(block ); // Update the position of the block based on its velocity
+        block.UpdateBlockPos(block); // Update the position of the block based on its velocity
 
         renderer.present(); // Present the renderer
+
+        End = SDL_GetTicks();
+
+        renderer.CalculateDeltaTime(Start, End);
 
         frameTime = SDL_GetTicks() - Start;
         if (frameTime < FRAME_DELAY)
@@ -74,12 +77,8 @@ int main(int argc, char **argv)
             SDL_Delay(FRAME_DELAY - frameTime); // Delay to achieve the desired frame rate
         }
 
-        End = SDL_GetTicks();
-
-        renderer.CalculateDeltaTime(Start , End);
-        
+        std::cout << DeltaTime << "\n";
     }
-
 
     renderer.DestroyWindowAndRenderer(); // Destroy the window and renderer
 

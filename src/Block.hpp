@@ -4,7 +4,7 @@
 #include "Engine.hpp"
 
 const int BLOCK_SIZE = 35;
-const int BLOCK_SPEED = 7.5;
+const int BLOCK_SPEED = 10;
 
 struct Block
 {
@@ -22,9 +22,9 @@ struct Block
 
 void Block::UpdateBlockPos(Block &Block )
 {
-    Block.y += Block.velocityY * DeltaTime; // Update the y-coordinate based on the y-velocity
+    Block.y += Block.velocityY * -DeltaTime; // Update the y-coordinate based on the y-velocity
 
-    Block.x += Block.velocityX* DeltaTime; // Update the x-coordinate based on the x-velocity
+    Block.x += Block.velocityX* -DeltaTime; // Update the x-coordinate based on the x-velocity
 }
 
 void Block::GetBlockPos(Block &Block)
