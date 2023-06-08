@@ -7,13 +7,7 @@ const int SCREEN_WIDTH = 640;
 
 const int GRAVITY = 1;
 
-double DT = 1;
-
-void CalculateDeltaTime(double Start , double End, double DT)
-{
-    DT = Start - End / 1000.0;
-}
-
+double DeltaTime;
 class Renderer
 {
 public:
@@ -24,6 +18,7 @@ public:
     DestroyWindowAndRenderer();
     void clear(); // Clears the renderer
     void present(); // Presents the renderer
+    void CalculateDeltaTime(double Start , double End );
 };
 
 Renderer::CreateRendererAndWindow(const char *windowTitle, int windowWidth, int windowHeight)
@@ -59,6 +54,11 @@ void Renderer::present()
 {
     // Present the renderer to display the rendered content
     SDL_RenderPresent(Renderer);
+}
+
+void Renderer::CalculateDeltaTime(double Start ,double End)
+{
+    DeltaTime = Start - End / 1000.0f;
 }
 
 Renderer renderer;

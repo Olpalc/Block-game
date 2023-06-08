@@ -6,8 +6,6 @@
 const int FRAME_RATE = 60;
 const int FRAME_DELAY = 1000 / FRAME_RATE;
 
-double DeltaTime;
-
 int main(int argc, char **argv)
 {
     Block block;
@@ -66,7 +64,7 @@ int main(int argc, char **argv)
 
         block.SpawnBlock(block);
 
-        block.UpdateBlockPos(block); // Update the position of the block based on its velocity
+        block.UpdateBlockPos(block ); // Update the position of the block based on its velocity
 
         renderer.present(); // Present the renderer
 
@@ -77,7 +75,9 @@ int main(int argc, char **argv)
         }
 
         End = SDL_GetTicks();
-        CalculateDeltaTime(Start , End ,DeltaTime );
+
+        renderer.CalculateDeltaTime(Start , End);
+        
     }
 
 
