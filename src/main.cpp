@@ -1,9 +1,10 @@
 #include "SDL2/SDL.h"
 #include "Engine.hpp"
 #include "Block.hpp"
+#include <iostream>
 
 
-const int FRAME_RATE = 240;
+const int FRAME_RATE = 360   ;
 const int FRAME_DELAY = 1000 / FRAME_RATE;
 
 int main(int argc, char **argv)
@@ -69,13 +70,16 @@ int main(int argc, char **argv)
 
         End = SDL_GetTicks();
 
+        frameTime = SDL_GetTicks() - Start;
+
         renderer.CalculateDeltaTime(Start, End);
 
-        frameTime = SDL_GetTicks() - Start;
-        if (frameTime < FRAME_DELAY)
-        {
-            SDL_Delay(FRAME_DELAY - frameTime); // Delay to achieve the desired frame rate
-        }
+         if (frameTime < FRAME_DELAY)
+         {
+             SDL_Delay(FRAME_DELAY - frameTime); // Delay to achieve the desired frame rate
+         }
+        std::cout<<"Speed = "<<BLOCK_SPEED<<"\n";
+        std::cout<<"DeltaTime = "<<DeltaTime<<"\n";
     }
 
     renderer.DestroyWindowAndRenderer(); // Destroy the window and renderer

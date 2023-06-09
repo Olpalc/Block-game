@@ -58,7 +58,7 @@ void Renderer::present()
 
 void Renderer::CalculateDeltaTime(double Start ,double End)
 {
-    DeltaTime = Start - End ;
+    DeltaTime = End - Start ;
 }
 
 Renderer renderer;
