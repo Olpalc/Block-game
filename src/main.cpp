@@ -1,10 +1,12 @@
 #include "SDL2/SDL.h"
-#include "Engine.hpp"
+#include "Renderer.hpp"
 #include "Block.hpp"
 #include <iostream>
+#include <chrono>
 
+#define DT_TO_FPS (x) (1/x)
 
-const int FRAME_RATE = 360   ;
+const int FRAME_RATE = 60;
 const int FRAME_DELAY = 1000 / FRAME_RATE;
 
 int main(int argc, char **argv)
@@ -24,6 +26,8 @@ int main(int argc, char **argv)
     SDL_Event Event;
     while (!_quit) // Main loop
     {
+        std::chrono::time_point lastFrame = std::chrono::system_clock::now();
+        std::chrono::time_point currentFrame;
         Start = SDL_GetTicks();
 
         while (SDL_PollEvent(&Event)) // Event loop
@@ -37,10 +41,10 @@ int main(int argc, char **argv)
                 switch (Event.key.keysym.sym)
                 {
                 case SDLK_RIGHT:
-                    block.velocityX = BLOCK_SPEED; // Set velocity to move right
+                    block.velocityX = BLOCK_SPEED;  // Set velocity to move right
                     break;
                 case SDLK_LEFT:
-                    block.velocityX = -BLOCK_SPEED; // Set velocity to move left
+                    block.velocityX = -BLOCK_SPEED ; // Set velocity to move left
                     break;
                 case SDLK_UP:
                     block.velocityY = -BLOCK_SPEED; // Set velocity to move up
@@ -72,14 +76,10 @@ int main(int argc, char **argv)
 
         frameTime = SDL_GetTicks() - Start;
 
-        renderer.CalculateDeltaTime(Start, End);
-
-         if (frameTime < FRAME_DELAY)
-         {
-             SDL_Delay(FRAME_DELAY - frameTime); // Delay to achieve the desired frame rate
-         }
-        std::cout<<"Speed = "<<BLOCK_SPEED<<"\n";
-        std::cout<<"DeltaTime = "<<DeltaTime<<"\n";
+        if (frameTime < FRAME_DELAY)
+        {
+            SDL_Delay(FRAME_DELAY - frameTime); // Delay to achieve the desired frame rate
+        }
     }
 
     renderer.DestroyWindowAndRenderer(); // Destroy the window and renderer
