@@ -5,7 +5,7 @@ Renderer renderer;
 Renderer::CreateRendererAndWindow(const char *windowTitle, int windowWidth, int windowHeight)
 {
     // Create a window
-    Window = SDL_CreateWindow(windowTitle, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, SDL_WINDOW_BORDERLESS);
+    Window = SDL_CreateWindow(windowTitle, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 
     // Create a renderer
     Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED);
