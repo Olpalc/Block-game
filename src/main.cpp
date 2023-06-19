@@ -78,8 +78,7 @@ int main(int argc, char **argv)
         {
             std::chrono::duration<double , std::milli> sleepTime (std::chrono::milliseconds(FRAME_DELAY) - frameTime);
             std::this_thread::sleep_for(sleepTime);
-        }
-        
+        } 
     }
 
     renderer.DestroyWindowAndRenderer(); // Destroy the window and renderer

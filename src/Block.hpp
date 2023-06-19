@@ -4,7 +4,7 @@
 #include "Renderer.hpp"
 
 const int BLOCK_SIZE = 35;
-const int BLOCK_SPEED = 8000;
+const int BLOCK_SPEED = 16000;
 
 struct Block
 {
