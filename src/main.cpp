@@ -3,6 +3,7 @@
 #include "Block.hpp"
 #include <iostream>
 #include <chrono>
+#include <thread>
 
 const int FRAME_RATE = 240;
 const int FRAME_DELAY = 1000 / FRAME_RATE;
@@ -17,15 +18,11 @@ int main(int argc, char **argv)
 
     renderer.CreateRendererAndWindow("Block-Game", SCREEN_WIDTH, SCREEN_HEIGHT); // Create renderer and window
 
-    double Start, End;
-    int frameTime;
-
     bool _quit = false;
     SDL_Event Event;
     while (!_quit) // Main loop
     {
-        std::chrono::time_point lastFrame = std::chrono::system_clock::now();
-        Start = SDL_GetTicks();
+        std::chrono::time_point<std::chrono::high_resolution_clock> lastFrame = std::chrono::high_resolution_clock::now();
 
         while (SDL_PollEvent(&Event)) // Event loop
         {
@@ -71,18 +68,18 @@ int main(int argc, char **argv)
 
         renderer.present(); // Present the renderer
 
-        std::chrono::time_point CurentFrame = std::chrono::system_clock::now();
+        std::chrono::time_point<std::chrono::high_resolution_clock> CurentFrame = std::chrono::high_resolution_clock::now();
 
         DeltaTime = CurentFrame - lastFrame;
 
-        End = SDL_GetTicks();
+        std::chrono::duration<double , std::milli> frameTime = CurentFrame - lastFrame;
 
-        frameTime = SDL_GetTicks() - Start;
-
-        if (frameTime < FRAME_DELAY)
+        if (frameTime < std::chrono::milliseconds(FRAME_DELAY)) //puts the thread to sleep to achieve desired frame rate
         {
-            SDL_Delay(FRAME_DELAY - frameTime); // Delay to achieve the desired frame rate
+            std::chrono::duration<double , std::milli> sleepTime (std::chrono::milliseconds(FRAME_DELAY) - frameTime);
+            std::this_thread::sleep_for(sleepTime);
         }
+        
     }
 
     renderer.DestroyWindowAndRenderer(); // Destroy the window and renderer
