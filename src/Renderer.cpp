@@ -1,4 +1,4 @@
-#include "Renderer.hpp" 
+#include "Renderer.hpp"
 
 Renderer renderer;
 
@@ -13,7 +13,7 @@ Renderer::CreateRendererAndWindow(const char *windowTitle, int windowWidth, int 
     return 0;
 }
 
-Renderer::DestroyWindowAndRenderer() 
+Renderer::DestroyWindowAndRenderer()
 {
     // Destroy the renderer and window
     SDL_DestroyRenderer(Renderer);
@@ -35,4 +35,25 @@ void Renderer::present()
 {
     // Present the renderer to display the rendered content
     SDL_RenderPresent(Renderer);
+}
+
+void Renderer::HandleInput()
+{
+    switch (Event.key.keysym.sym)
+    {
+    case SDLK_d:
+        block.velocityX = BLOCK_SPEED; // Set velocity to move right
+        break;
+    case SDLK_a:
+        block.velocityX = -BLOCK_SPEED; // Set velocity to move left
+        break;
+    case SDLK_w:
+        block.velocityY = -BLOCK_SPEED; // Set velocity to move up
+        break;
+    case SDLK_s:
+        block.velocityY = BLOCK_SPEED; // Set velocity to move down
+        break;
+    default:
+        break;
+    }
 }

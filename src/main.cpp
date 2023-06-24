@@ -10,7 +10,10 @@ const int FRAME_DELAY = 1000 / FRAME_RATE;
 
 int main(int argc, char **argv)
 {
-    Block block;
+    Block BarrierBlock;
+
+    BarrierBlock.x = 400;
+    BarrierBlock.y = 100;
 
     SDL_Init(SDL_INIT_EVERYTHING); // Initialize SDL2;
 
@@ -19,50 +22,34 @@ int main(int argc, char **argv)
     renderer.CreateRendererAndWindow("Block-Game", SCREEN_WIDTH, SCREEN_HEIGHT); // Create renderer and window
 
     bool _quit = false;
-    SDL_Event Event;
     while (!_quit) // Main loop
     {
         std::chrono::time_point<std::chrono::high_resolution_clock> lastFrame = std::chrono::high_resolution_clock::now();
 
-        while (SDL_PollEvent(&Event)) // Event loop
+        while (SDL_PollEvent(&renderer.Event)) // Event loop
         {
-            switch (Event.type)
+            switch (renderer.Event.type)
             {
             case SDL_QUIT:
                 _quit = true; // Set flag to exit the main loop
                 break;
             case SDL_KEYDOWN:
-                switch (Event.key.keysym.sym)
-                {
-                case SDLK_RIGHT:
-                    block.velocityX = BLOCK_SPEED; // Set velocity to move right
-                    break;
-                case SDLK_LEFT:
-                    block.velocityX = -BLOCK_SPEED; // Set velocity to move left
-                    break;
-                case SDLK_UP:
-                    block.velocityY = -BLOCK_SPEED; // Set velocity to move up
-                    break;
-                case SDLK_DOWN:
-                    block.velocityY = BLOCK_SPEED; // Set velocity to move down
-                    break;
-                default:
-                    break;
-                }
+                renderer.HandleInput();
                 break;
             default:
                 break;
             }
         }
         std::chrono::duration<double> DeltaTime;
-        double value =  DeltaTime.count();
+        double value = DeltaTime.count();
 
         block.BounceOff(block);
         block.BlockLimit(block); // Apply block movement limits
 
         renderer.clear(); // Clear the renderer
 
-        block.SpawnBlock(block);
+        block.SpawnBlock(block, 0, 255, 255);
+        BarrierBlock.SpawnBlock(BarrierBlock, 150, 150, 150);
 
         block.UpdateBlockPos(block, value); // Update the position of the block based on its velocity
 
@@ -72,13 +59,13 @@ int main(int argc, char **argv)
 
         DeltaTime = CurentFrame - lastFrame;
 
-        std::chrono::duration<double , std::milli> frameTime = CurentFrame - lastFrame;
+        std::chrono::duration<double, std::milli> frameTime = CurentFrame - lastFrame;
 
-        if (frameTime < std::chrono::milliseconds(FRAME_DELAY)) //puts the thread to sleep to achieve desired frame rate
+        if (frameTime < std::chrono::milliseconds(FRAME_DELAY)) // puts the thread to sleep to achieve desired frame rate
         {
-            std::chrono::duration<double , std::milli> sleepTime (std::chrono::milliseconds(FRAME_DELAY) - frameTime);
+            std::chrono::duration<double, std::milli> sleepTime(std::chrono::milliseconds(FRAME_DELAY) - frameTime);
             std::this_thread::sleep_for(sleepTime);
-        } 
+        }
     }
 
     renderer.DestroyWindowAndRenderer(); // Destroy the window and renderer

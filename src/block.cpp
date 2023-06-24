@@ -1,5 +1,7 @@
 #include "Block.hpp"
 
+Block block;
+
 void Block::UpdateBlockPos(Block &Block , double DeltaTime )
 {
     Block.y += Block.velocityY * DeltaTime; // Update the y-coordinate based on the y-velocity
@@ -52,9 +54,9 @@ void Block::BounceOff(Block &Block)
     }
 }
 
-void Block::SpawnBlock(Block &Block)
+void Block::SpawnBlock(Block &Block, Uint8 R , Uint8 G , Uint8 B)
 {
-    SDL_SetRenderDrawColor(renderer.Renderer, 0, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer.Renderer, R, G, B, 255);
     SDL_Rect BlockRect = {Block.x, Block.y, BLOCK_SIZE, BLOCK_SIZE}; // Render the block
     SDL_RenderFillRect(renderer.Renderer, &BlockRect);
 }
