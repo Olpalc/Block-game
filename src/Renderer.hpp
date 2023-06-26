@@ -13,8 +13,8 @@ public:
     SDL_Renderer *Renderer;
     SDL_Event Event;
 
-    CreateRendererAndWindow(const char *windowTitle, int windowWidth, int windowHeight);
-    DestroyWindowAndRenderer();
+    void CreateRendererAndWindow(const char *windowTitle, int windowWidth, int windowHeight);
+    void DestroyWindowAndRenderer();
     void clear(); // Clears the renderer
     void present(); // Presents the renderer
     void HandleInput();

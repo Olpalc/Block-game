@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 
     SDL_Init(SDL_INIT_EVERYTHING); // Initialize SDL2;
 
-    block.GetBlockPos(block);
+    block.GetBlockPos();
 
     renderer.CreateRendererAndWindow("Block-Game", SCREEN_WIDTH, SCREEN_HEIGHT); // Create renderer and window
 
@@ -43,15 +43,15 @@ int main(int argc, char **argv)
         std::chrono::duration<double> DeltaTime;
         double value = DeltaTime.count();
 
-        block.BounceOff(block);
-        block.BlockLimit(block); // Apply block movement limits
+        block.BounceOff();
+        block.BlockLimit(); // Apply block movement limits
 
         renderer.clear(); // Clear the renderer
 
-        block.SpawnBlock(block, 0, 255, 255);
-        BarrierBlock.SpawnBlock(BarrierBlock, 150, 150, 150);
+        block.SpawnBlock( 0, 255, 255);
+        BarrierBlock.SpawnBlock( 150, 150, 150);
 
-        block.UpdateBlockPos(block, value); // Update the position of the block based on its velocity
+        block.UpdateBlockPos(value); // Update the position of the block based on its velocity
 
         renderer.present(); // Present the renderer
 

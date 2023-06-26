@@ -2,61 +2,61 @@
 
 Block block;
 
-void Block::UpdateBlockPos(Block &Block , double DeltaTime )
+void Block::UpdateBlockPos(  double DeltaTime )
 {
-    Block.y += Block.velocityY * DeltaTime; // Update the y-coordinate based on the y-velocity
+    this->y += this->velocityY * DeltaTime; // Update the y-coordinate based on the y-velocity
 
-    Block.x += Block.velocityX*DeltaTime; // Update the x-coordinate based on the x-velocity
+    this->x += this->velocityX*DeltaTime; // Update the x-coordinate based on the x-velocity
 }
 
-void Block::GetBlockPos(Block &Block)
+void Block::GetBlockPos()
 {
     // Set the initial position of the block at the center of the screen
-    Block.y = (SCREEN_HEIGHT - BLOCK_SIZE) / 2;
-    Block.x = (SCREEN_WIDTH - BLOCK_SIZE) / 2;
+    this->y = (SCREEN_HEIGHT - BLOCK_SIZE) / 2;
+    this->x = (SCREEN_WIDTH - BLOCK_SIZE) / 2;
 }
 
-void Block::BlockLimit(Block &Block)
+void Block::BlockLimit()
 {
     // Limit the block's movement within the window boundaries
 
     // Check if the block reaches the top or bottom boundaries
-    if (Block.y <= 0)
+    if (this->y <= 0)
     {
-        Block.y = 0;
+        this->y = 0;
     }
-    else if (Block.y + BLOCK_SIZE >= SCREEN_HEIGHT)
+    else if (this->y + BLOCK_SIZE >= SCREEN_HEIGHT)
     {
-        Block.y = SCREEN_HEIGHT - BLOCK_SIZE;
+        this->y = SCREEN_HEIGHT - BLOCK_SIZE;
     }
 
     // Check if the block reaches the left or right boundaries
-    if (Block.x <= 0)
+    if (this->x <= 0)
     {
-        Block.x = 0;
+        this->x = 0;
     }
-    else if (Block.x + BLOCK_SIZE >= SCREEN_WIDTH)
+    else if (this->x + BLOCK_SIZE >= SCREEN_WIDTH)
     {
-        Block.x = SCREEN_WIDTH - BLOCK_SIZE;
+        this->x = SCREEN_WIDTH - BLOCK_SIZE;
     }
 }
 
-void Block::BounceOff(Block &Block)
+void Block::BounceOff()
 {
-    if (Block.x <= 0 || Block.x >= SCREEN_WIDTH - BLOCK_SIZE)
+    if (this->x <= 0 || this->x >= SCREEN_WIDTH - BLOCK_SIZE)
     {
-        Block.velocityX = -Block.velocityX;
+        this->velocityX = -this->velocityX;
     }
 
-    if (Block.y <= 0 || Block.y >= SCREEN_HEIGHT - BLOCK_SIZE)
+    if (this->y <= 0 || this->y >= SCREEN_HEIGHT - BLOCK_SIZE)
     {
-        Block.velocityY = -Block.velocityY;
+        this->velocityY = -this->velocityY;
     }
 }
 
-void Block::SpawnBlock(Block &Block, Uint8 R , Uint8 G , Uint8 B)
+void Block::SpawnBlock( Uint8 R , Uint8 G , Uint8 B)
 {
     SDL_SetRenderDrawColor(renderer.Renderer, R, G, B, 255);
-    SDL_Rect BlockRect = {Block.x, Block.y, BLOCK_SIZE, BLOCK_SIZE}; // Render the block
+    SDL_Rect BlockRect = {this->x, this->y, BLOCK_SIZE, BLOCK_SIZE}; // Render the block
     SDL_RenderFillRect(renderer.Renderer, &BlockRect);
 }
