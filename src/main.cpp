@@ -48,8 +48,8 @@ int main(int argc, char **argv)
 
         renderer.clear(); // Clear the renderer
 
-        block.SpawnBlock( 93, 63, 211);
-        BarrierBlock.SpawnBlock( 150, 150, 150);
+        block.SpawnBlock( 32,178,170);
+        BarrierBlock.SpawnBlock( 85,107,47) ;
 
         block.UpdateBlockPos(value); // Update the position of the block based on its velocity
 
